@@ -1,0 +1,3 @@
+Generate Rails applications with this template by running:
+
+  $ rails new APP_NAME -m https://github.com/jparker/urgetopunt-template/base.rb --skip-bundle --skip-test-unit [-d postgresql]
