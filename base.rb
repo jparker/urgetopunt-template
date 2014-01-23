@@ -30,6 +30,10 @@ RUBY
   RUBY
 end
 
+environment "config.action_mailer.default_url_options = { host: 'localhost:5000' }", env: 'development'
+environment "config.action_mailer.default_url_options = { host: 'test.host' }", env: 'test'
+environment "#config.action_mailer.default_url_options = { host: 'test.host' }", env: 'production'
+
 remove_file 'app/views/layouts/application.html.erb'
 template 'application.html.haml', 'app/views/layouts/application.html.haml'
 template 'flash.html.haml', 'app/views/application/_flash.html.haml'
@@ -61,6 +65,8 @@ template 'spec_helper.rb', 'spec/spec_helper.rb'
 template 'database_cleaner.rb', 'spec/support/database_cleaner.rb'
 create_file 'spec/factories/.keep'
 
+template 'Procfile', 'Procfile'
+
 remove_file 'README.rdoc'
 create_file 'README', <<-END
 To get asset_sync working on Heroku, set asset_host in production.rb, and run
@@ -69,7 +75,6 @@ the following heroku command:
 $ heroku labs:enable user-env-compile -a NAME_OF_HEROKU_APP
 $ heroku config:set AWS_ACCESS_KEY_ID=XXX AWS_SECRET_ACCESS_KEY=YYY FOG_DIRECTORY=ZZZ FOG_PROVIDER=AWS
 END
-
 
 append_file '.gitignore', <<GITIGNORE
 config/database.yml
