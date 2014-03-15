@@ -24,15 +24,12 @@ application <<-RUBY
 RUBY
 
 %w[development test].each do |env|
-  environment <<-RUBY, env: env
-  # log rotation
-  config.logger = Logger.new(Rails.root.join('log', Rails.env + '.log'), 5, 5 * 1024 * 1024)
-  RUBY
+  environment 'config.logger = Logger.new(Rails.root.join('log', Rails.env + '.log'), 5, 5 * 1024 * 1024)', env: env
 end
 
 environment "config.action_mailer.default_url_options = { host: 'localhost:5000' }", env: 'development'
 environment "config.action_mailer.default_url_options = { host: 'test.host' }", env: 'test'
-environment "#config.action_mailer.default_url_options = { host: 'test.host' }", env: 'production'
+environment "#config.action_mailer.default_url_options = { host: 'example.com' }", env: 'production'
 
 remove_file 'app/views/layouts/application.html.erb'
 template 'application.html.haml', 'app/views/layouts/application.html.haml'
