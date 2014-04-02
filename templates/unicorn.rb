@@ -1,10 +1,10 @@
-worker_processes Integer(ENV.fetch('WEB_CONCURRENCY') {3})
-timeout          30
-preload_app      true
+worker_processes Integer(ENV.fetch('WEB_CONCURRENCY', 3))
+timeout 30
+preload_app true
 
-before_fork do |server, worker|
-  Signal.trap('TERM') do
-    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
+before_fork do |master, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn master intercepting TERM, sending myself QUIT instead'
     Process.kill 'QUIT', Process.pid
   end
 
@@ -12,13 +12,11 @@ before_fork do |server, worker|
     ActiveRecord::Base.connection.disconnect!
     Rails.logger.info 'Unicorn master disconnected from database'
   end
-
-  sleep 1
 end
 
-after_fork do |server, worker|
-  Signal.trap('TERM') do
-    puts 'Unicorn worker intercepting TERM and doing nothing (waiting for master to send QUIT)'
+after_fork do |master, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn worker ignoring TERM, waiting for QUIT from master'
   end
 
   if defined?(ActiveRecord::Base)

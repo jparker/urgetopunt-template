@@ -1,7 +1,14 @@
 module FlashHelper
-  ALERT_CLASSES = { notice: 'alert-success', alert: 'alert-danger', warning: 'alert-warning' }
+  SEVERITIES = {
+    alert:  'alert alert-danger',
+    notice: 'alert alert-success',
+  }.tap { |h| h.default = 'alert alert-info' }
 
-  def alert_class(level)
-    ALERT_CLASSES.fetch(level) { 'alert-info' }
+  def flash_div(severity)
+    content_tag :div, class: SEVERITIES[severity], data: {dismiss: 'alert'} do
+      content_tag :p, class: 'lead' do
+        content_tag(:span, raw('&times;'), class: 'close') + capture(&block)
+      end
+    end
   end
 end
