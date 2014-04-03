@@ -23,6 +23,12 @@ apply File.join(File.dirname(__FILE__), 'exceptions.rb')
 # spring-ify commands
 run 'bundle exec spring binstub --all'
 
+# setup git
+git :init
+git add: '-A'
+git commit: '-m "initial commit"'
+@todo << "Setup git remotes: 'git remote add origin git@github.com:...'"
+
 @todo.each do |item|
   puts "[ ] #{item}"
 end

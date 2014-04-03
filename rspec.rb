@@ -28,3 +28,6 @@ template 'database_cleaner.rb', 'spec/support/database_cleaner.rb'
 gsub_file 'spec/spec_helper.rb',
   'config.use_transactional_fixtures = true',
   "# see spec/support/database_cleaner.rb\n  config.use_transactional_fixtures = false"
+
+run 'bundle exec guard init'
+gsub_file 'Guardfile', 'guard :rspec do', "guard :rspec, cmd: './bin/rspec' do"
