@@ -10,3 +10,5 @@ environment <<-RUBY, env: 'production'
     end
   end
 RUBY
+
+@todo << 'Set asset_host in production.rb to cloudfront distro'

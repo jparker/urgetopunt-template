@@ -18,6 +18,8 @@ remove_file 'app/assets/stylesheets/application.css'
 remove_file 'app/views/layouts/application.html.erb'
 template 'application.html.haml', 'app/views/layouts/application.html.haml'
 
+template 'flash_helper.rb', 'app/helpers/flash_helper.rb'
+
 # configure kaminari
 generate 'kaminari:config'
 # generate 'kaminari:views', 'bootstrap'
