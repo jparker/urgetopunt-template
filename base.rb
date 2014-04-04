@@ -19,6 +19,7 @@ apply File.join(File.dirname(__FILE__), 'views.rb')
 apply File.join(File.dirname(__FILE__), 'memory.rb')
 apply File.join(File.dirname(__FILE__), 'rspec.rb')
 apply File.join(File.dirname(__FILE__), 'exceptions.rb')
+apply File.join(File.dirname(__FILE__), 'responders.rb')
 
 # spring-ify commands
 run 'bundle exec spring binstub --all'
