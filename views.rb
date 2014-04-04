@@ -23,3 +23,6 @@ template 'flash_helper.rb', 'app/helpers/flash_helper.rb'
 # configure kaminari
 generate 'kaminari:config'
 # generate 'kaminari:views', 'bootstrap'
+
+# configure simple_form
+generate 'simple_form:install', '--bootstrap'

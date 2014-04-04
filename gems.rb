@@ -10,7 +10,8 @@ gem 'pry-rails'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rein'
 gem 'responders'
-gem 'simple_form'
+# revert to release when bootstrap 3 support is final
+gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'unicorn'
 
 gem 'spring-commands-rspec', group: :development
