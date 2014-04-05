@@ -4,7 +4,7 @@
     %title TBD
     %meta(charset='utf-8')
     %meta(name='viewport' content='width=device-width,initial-scale=1')
-    = stylesheet_link_tag 'application', media: 'all', data: { turbolinks_track: true }
+    = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tag
   %body
     .container
@@ -12,4 +12,4 @@
         = flash_div severity do
           = message
       = yield
-    = javascript_include_tag 'application', data: { turbolinks_track: true }
+    = javascript_include_tag 'application'
