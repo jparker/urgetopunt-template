@@ -1,5 +1,6 @@
 gem 'bootstrap-sass'
 gem 'exception_notification'
+gem 'font-awesome-sass'
 gem 'gctools', require: 'gctools/oobgc'
 gem 'haml-rails'
 gem 'jquery-ui-rails'
