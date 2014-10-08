@@ -36,4 +36,4 @@ end
 
 gem 'rails_12factor', group: [:production, :staging]
 
-run 'bundle install -j 4'
+run 'bundle install -j 2'
