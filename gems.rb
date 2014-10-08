@@ -20,7 +20,7 @@ gem 'spring-commands-rspec', group: :development
 gem_group :development, :test do
   gem 'dotenv-rails'
   gem 'ffaker'
-  gem 'rspec-rails', '~> 2.99.0.beta2'
+  gem 'rspec-rails', '~> 3.1.0'
 end
 
 gem_group :test do
@@ -30,7 +30,6 @@ gem_group :test do
   gem 'guard-rspec'
   gem 'launchy'
   gem 'poltergeist'
-  gem 'rspec', '~> 2.99.0.beta2'
   gem 'shoulda-matchers', require: false
   gem 'timecop'
 end
