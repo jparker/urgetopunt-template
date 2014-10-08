@@ -9,7 +9,7 @@ gem 'kaminari-bootstrap'
 gem 'newrelic_rpm'
 gem 'pry-rails'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rein'
+gem 'foreigner'
 gem 'responders'
 # revert to release when bootstrap 3 support is final
 gem 'simple_form', github: 'plataformatec/simple_form'
