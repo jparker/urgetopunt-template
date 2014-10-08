@@ -25,12 +25,13 @@ apply File.join(File.dirname(__FILE__), 'responders.rb')
 # spring-ify commands
 run 'bundle exec spring binstub --all'
 
+@todo << "Setup git remotes: 'git remote add origin git@github.com:...'"
+
+File.open 'TODO', 'w' do |f|
+  @todo.each { |item| f.puts "[ ] #{item}" }
+end
+
 # setup git
 git :init
 git add: '-A'
 git commit: '-m "initial commit"'
-@todo << "Setup git remotes: 'git remote add origin git@github.com:...'"
-
-@todo.each do |item|
-  puts "[ ] #{item}"
-end
