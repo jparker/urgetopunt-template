@@ -12,7 +12,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'foreigner'
 gem 'responders'
 # revert to release when bootstrap 3 support is final
-gem 'simple_form', github: 'plataformatec/simple_form'
+gem 'simple_form', '~> 3.1.0.rc1'
 gem 'unicorn'
 
 gem 'spring-commands-rspec', group: :development
