@@ -5,18 +5,17 @@ inject_into_file 'app/assets/javascripts/application.js',
 copy_file 'app/assets/stylesheets/application.css',
   'app/assets/stylesheets/application.css.scss'
 remove_file 'app/assets/stylesheets/application.css'
-inject_into_file 'app/assets/stylesheets/application.css.scss',
-  " *= require font-awesome\n",
-  before: ' *= require_self'
 gsub_file 'app/assets/stylesheets/application.css.scss',
   "*= require_self\n *= require_tree .",
   "*= require_tree .\n *= require_self"
 
 append_file 'app/assets/stylesheets/application.css.scss', <<-SCSS
 @import 'bootstrap';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
 
 body {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 SCSS
 
