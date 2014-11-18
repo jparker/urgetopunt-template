@@ -1,4 +1,4 @@
-# rails new APP_NAME --skip-bundle --skip-test-unit [-d postgresql]
+# rails new APP_NAME --skip-bundle --skip-test-unit [--skip-turbolinks] [-d postgresql]
 
 @todo = []
 
