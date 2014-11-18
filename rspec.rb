@@ -41,6 +41,9 @@ inject_into_file 'spec/rails_helper.rb',
 # configure database_cleaner
 template 'database_cleaner.rb', 'spec/support/database_cleaner.rb'
 
+# add custom matchers
+template 'have_error_matcher.rb', 'spec/support/have_error_matcher.rb'
+
 gsub_file 'spec/rails_helper.rb',
   'config.use_transactional_fixtures = true',
   "# see spec/support/database_cleaner.rb\n  config.use_transactional_fixtures = false"
