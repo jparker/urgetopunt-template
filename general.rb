@@ -19,6 +19,7 @@ environment 'config.active_record.schema_format = :ruby', env: 'production'
   environment "config.logger = Logger.new(Rails.root.join('log', Rails.env + '.log'), 5, 5*1_024*1_024)",
     env: env
 end
+append_file '.gitignore', "/log/*.log.*\n"
 
 # always use ssl in production
 gsub_file 'config/environments/production.rb',
