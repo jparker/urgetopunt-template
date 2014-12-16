@@ -43,9 +43,11 @@ end
   RUBY
 end
 
-template 'feature_helper.rb', 'spec/feature_helper.rb'
+template 'features_helper.rb', 'spec/features_helper.rb'
 template 'database_cleaner.rb', 'spec/support/database_cleaner.rb'
 template 'have_error_matcher.rb', 'spec/support/have_error_matcher.rb'
+
+Dir.mkdir 'spec/features'
 
 run 'bundle exec guard init'
 gsub_file 'Guardfile', /cmd: "bundle exec rspec"/ do
