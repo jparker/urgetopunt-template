@@ -1,0 +1,4 @@
+%div{ class: alert_class(severity), data: { dismiss: 'alert' } }
+  %p.lead
+    %span.close= icon 'times', '', class: 'fa-lg'
+    = alert_icon severity, message, class: 'fa-lg'

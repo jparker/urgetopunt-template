@@ -1,14 +1,30 @@
 module FlashHelper
-  SEVERITIES = {
-    alert:  'alert alert-danger',
-    notice: 'alert alert-success',
-  }.tap { |h| h.default = 'alert alert-info' }
+  ALERT_SEVERITIES = {
+    'notice'  => 'alert-success',
+    'info'    => 'alert-info',
+    'warning' => 'alert-warning',
+    'alert'   => 'alert-danger',
+  }
 
-  def flash_div(severity, &block)
-    content_tag :div, class: SEVERITIES[severity.to_sym], data: {dismiss: 'alert'} do
-      content_tag :p, class: 'lead' do
-        content_tag(:span, raw('&times;'), class: 'close') + capture(&block)
-      end
-    end
+  def alert_class(key)
+    ['alert', ALERT_SEVERITIES.fetch(key)]
+  end
+
+  ALERT_ICONS = {
+    'notice'  => 'check-circle',
+    'info'    => 'info-circle',
+    'warning' => 'exclamation-triangle',
+    'alert'   => 'exclamation-circle',
+  }
+
+  def alert_icon(key, *args)
+    icon ALERT_ICONS.fetch(key), *args
+  end
+
+  # Devise stores data in the flash that is not meant to be displayed
+  IGNORED_FLASH_KEYS = %w[ timedout ]
+
+  def printable_flash
+    flash.reject { |key, _| IGNORED_FLASH_KEYS.include? key }
   end
 end

@@ -1,28 +1,27 @@
-inject_into_file 'app/assets/javascripts/application.js',
-  "//= require bootstrap\n",
-  after: "//= require jquery_ujs\n"
-
 copy_file 'app/assets/stylesheets/application.css',
   'app/assets/stylesheets/application.css.scss'
 remove_file 'app/assets/stylesheets/application.css'
-gsub_file 'app/assets/stylesheets/application.css.scss',
-  "*= require_self\n *= require_tree .",
-  "*= require_tree .\n *= require_self"
 
 append_file 'app/assets/stylesheets/application.css.scss', <<-SCSS
+// Uncomment and change this value to tweak font sizes globally:
+// $font-base-size: 12px;
+
 @import 'bootstrap';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
-body {
-  margin-top: 60px;
-}
+// Add a top margin to the body if using navbar fixed to the top of the page
+// body {
+//   margin-top: 60px;
+// }
 SCSS
 
 remove_file 'app/views/layouts/application.html.erb'
 template 'application.html.haml', 'app/views/layouts/application.html.haml'
 
 template 'flash_helper.rb', 'app/helpers/flash_helper.rb'
+template 'alert.html.haml', 'app/views/application/_alert.html.haml'
+template 'flash.html.haml', 'app/views/application/_flash.html.haml'
 
 # configure kaminari
 generate 'kaminari:config'
@@ -30,3 +29,4 @@ generate 'kaminari:config'
 
 # configure simple_form
 generate 'simple_form:install', '--bootstrap'
+template 'citext_input.rb', 'app/inputs/citext_input.rb'

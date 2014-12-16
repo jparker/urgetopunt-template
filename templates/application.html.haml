@@ -4,13 +4,10 @@
     %title TBD
     %meta(charset='utf-8')
     %meta(name='viewport' content='width=device-width,initial-scale=1')
-    -# Add back turbolinks data if you are using it
-    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all', data: { turbolinks_track: true }
     = csrf_meta_tag
   %body
     .container
-      - flash.each do |severity, message|
-        = flash_div severity do
-          = message
+      = render 'flash'
       = yield
-    = javascript_include_tag 'application'
+    = javascript_include_tag 'application', data: { turbolinks_track: true }

@@ -1,6 +1,5 @@
 environment <<-RUBY, env: 'production'
-
-  # sendgrid configuration
+# sendgrid configuration
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              'smtp.sendgrid.net',
@@ -16,14 +15,12 @@ environment <<-RUBY, env: 'production'
   }
 RUBY
 environment <<-RUBY, env: 'development'
-
-  config.action_mailer.default_url_options = {
+config.action_mailer.default_url_options = {
     host: "localhost:\#{ENV.fetch('PORT', 5000)}"
   }
 RUBY
 environment <<-RUBY, env: 'test'
-
-  config.action_mailer.default_url_options = {
+config.action_mailer.default_url_options = {
     host: 'test.host'
   }
 RUBY
