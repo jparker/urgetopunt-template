@@ -7,3 +7,9 @@ in_root {
 
 gsub_file 'config/environments/staging.rb',
   /#{app_name}-production/, "#{app_name}-staging"
+
+require 'yaml'
+
+secrets = YAML.load_file 'config/secrets.yml'
+append_file 'config/secrets.yml',
+  { 'staging' => secrets['production'] }.to_yaml.sub(/\A---/, '')
