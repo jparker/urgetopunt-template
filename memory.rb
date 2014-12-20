@@ -14,4 +14,4 @@ end
 end
 
 template 'env', '.env'
-@todo << "Set RUBY_GC_HEAP vars in production/staging with heroku config:set"
+@todo << '`heroku config:set RUBY_GC_HEAP_*` to tune gc and memory usage'

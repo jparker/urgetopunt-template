@@ -9,7 +9,6 @@ end
 # set ruby version
 inject_into_file 'Gemfile', "ruby '#{RUBY_VERSION}'\n", after: /\Asource .*\n/
 
-apply File.join(__dir__, 'turbolinks.rb')
 apply File.join(__dir__, 'gems.rb')
 apply File.join(__dir__, 'general.rb')
 apply File.join(__dir__, 'cloudfront.rb')

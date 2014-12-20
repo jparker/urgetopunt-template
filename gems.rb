@@ -1,5 +1,3 @@
-@todo << 'upgrade Gemfile with rails = 4.2.0.rc3 (then run `rake rails:update`)'
-
 gem 'bootstrap-sass'
 gem 'exception_notification'
 gem 'font-awesome-sass'
@@ -12,8 +10,7 @@ gem 'newrelic_rpm'
 gem 'pry-rails'
 gem 'rack-cors', require: 'rack/cors'
 
-@todo << 'upgrade Gemfile with responders ~> 2.0 (then run `rails generate responders:install`)'
-# gem 'responders', '~> 2.0'
+gem 'responders', '~> 2.0'
 gem 'responders'
 
 gem 'simple_form', '~> 3.1.0'

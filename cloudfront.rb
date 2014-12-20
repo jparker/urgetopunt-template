@@ -1,9 +1,6 @@
 comment_lines 'config/environments/production.rb', /config\.serve_static_assets = false/
 
-environment <<RUBY, env: 'production'
-# Enable serving of static assets to lazily feed Cloudfront from app
-  config.serve_static_assets = true
-RUBY
+@todo << '`heroku config:set RAILS_SERVE_STATIC_FILES=true` to feed cloudfront'
 
 environment <<RUBY, env: 'production'
 config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
