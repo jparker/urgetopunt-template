@@ -43,6 +43,10 @@ end
   RUBY
 end
 
+append_to_file '.env', <<-END
+SOURCE_ANNOTATION_DIRECTORIES=spec
+END
+
 template 'features_helper.rb', 'spec/features_helper.rb'
 template 'database_cleaner.rb', 'spec/support/database_cleaner.rb'
 template 'have_error_matcher.rb', 'spec/support/have_error_matcher.rb'

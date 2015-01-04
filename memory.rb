@@ -13,5 +13,11 @@ end
   RUBY
 end
 
-template 'env', '.env'
+append_to_file '.env', <<-END
+RUBY_GC_HEAP_FREE_SLOTS=100000
+RUBY_GC_HEAP_GROWTH_FACTOR=1.25
+RUBY_GC_HEAP_GROWTH_MAX_SLOTS=600000
+RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.5
+END
+
 @todo << '`heroku config:set RUBY_GC_HEAP_*` to tune gc and memory usage'

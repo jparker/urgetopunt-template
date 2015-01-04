@@ -9,6 +9,9 @@ end
 # set ruby version
 inject_into_file 'Gemfile', "ruby '#{RUBY_VERSION}'\n", after: /\Asource .*\n/
 
+# housekeeping that must be performed before anything below
+create_file '.env'
+
 apply File.join(__dir__, 'gems.rb')
 apply File.join(__dir__, 'general.rb')
 apply File.join(__dir__, 'cloudfront.rb')
