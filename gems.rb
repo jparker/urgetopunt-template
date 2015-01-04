@@ -16,7 +16,10 @@ gem 'responders'
 gem 'simple_form', '~> 3.1.0'
 gem 'unicorn'
 
-gem 'spring-commands-rspec', group: :development
+gem_group :development do
+  gem 'bundler-audit'
+  gem 'spring-commands-rspec'
+end
 
 gem_group :development, :test do
   gem 'dotenv-rails'
