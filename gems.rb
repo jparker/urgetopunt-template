@@ -1,7 +1,12 @@
 gem 'bootstrap-sass'
 gem 'exception_notification'
 gem 'font-awesome-sass'
-gem 'gctools', require: 'gctools/oobgc'
+
+RUBY_VERSION.match /\A2\.[01]\./ do
+  # only use gctools on ruby < 2.2.0
+  gem 'gctools', require: 'gctools/oobgc'
+end
+
 gem 'haml-rails'
 gem 'jquery-ui-rails'
 gem 'kaminari'

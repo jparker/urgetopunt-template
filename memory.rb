@@ -1,16 +1,19 @@
-inject_into_file 'app/controllers/application_controller.rb', before: /end\z/ do
-  "\n  after_action ->{ GC::OOB.run }\n"
-end
+RUBY_VERSION.match /\A2\.[01]\./ do
+  # only use gctools on ruby < 2.2.0
+  inject_into_file 'app/controllers/application_controller.rb', before: /end\z/ do
+    "\n  after_action ->{ GC::OOB.run }\n"
+  end
 
-inject_into_file 'config.ru', before: 'run Rails.application' do
-  <<-RUBY
+  inject_into_file 'config.ru', before: 'run Rails.application' do
+    <<-RUBY
 
-require 'gctools/oobgc'
-if defined?(Unicorn::HttpRequest)
-  use GC::OOB::UnicornMiddleware
-end
+  require 'gctools/oobgc'
+  if defined?(Unicorn::HttpRequest)
+    use GC::OOB::UnicornMiddleware
+  end
 
-  RUBY
+    RUBY
+  end
 end
 
 append_to_file '.env', <<-END
