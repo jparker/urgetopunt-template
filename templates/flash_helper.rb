@@ -7,7 +7,7 @@ module FlashHelper
   }
 
   def alert_class(key)
-    ['alert', ALERT_SEVERITIES.fetch(key)]
+    ALERT_SEVERITIES.fetch(key)
   end
 
   ALERT_ICONS = {
@@ -19,6 +19,12 @@ module FlashHelper
 
   def alert_icon(key, *args)
     icon ALERT_ICONS.fetch(key), *args
+  end
+
+  def close_alert
+    button_tag aria: { label: 'Close' }, class: 'close', data: { dismiss: 'alert' }, type: 'button' do
+      content_tag :span, raw('&times;'), aria: { hidden: true }
+    end
   end
 
   # Devise stores data in the flash that is not meant to be displayed

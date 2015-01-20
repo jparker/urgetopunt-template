@@ -16,6 +16,10 @@ append_file 'app/assets/stylesheets/application.css.scss', <<-SCSS
 // }
 SCSS
 
+inject_into_file 'app/assets/javascripts/application.js', before: %r{//= require_tree .} do
+  "//= require bootstrap\n"
+end
+
 remove_file 'app/views/layouts/application.html.erb'
 template 'application.html.haml', 'app/views/layouts/application.html.haml'
 
