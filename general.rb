@@ -3,7 +3,7 @@ application <<-RUBY
 config.generators do |g|
       g.helper false
       g.assets false
-      g.test_framework :rspec, fixture: false
+      g.test_framework :#{@test_framework}, fixture: false
     end
 RUBY
 

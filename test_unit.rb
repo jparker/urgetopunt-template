@@ -1,6 +1,8 @@
-append_file 'test/test_helper.rb', <<-RUBY
+inject_into_file 'test/test_helper.rb', after: "require 'rails/test_help'\n" do
+  "\nrequire 'capybara/rails'\n"
+end
 
-Capybara.app, _ = Rack::Builder.parse_file File.expand_path Rails.root.join 'config.ru'
+append_file 'test/test_helper.rb', <<-RUBY
 
 class ActionDispatch::IntegrationTest
   include Capyabara::DSL

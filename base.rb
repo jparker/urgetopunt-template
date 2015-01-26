@@ -19,14 +19,22 @@ apply File.join(__dir__, 'gems.rb')
 apply File.join(__dir__, 'general.rb')
 apply File.join(__dir__, 'cloudfront.rb')
 apply File.join(__dir__, 'sendgrid.rb')
+
 if puma?
   apply File.join(__dir__, 'puma.rb')
 else
   apply File.join(__dir__, 'unicorn.rb')
 end
+
 apply File.join(__dir__, 'views.rb')
 apply File.join(__dir__, 'memory.rb')
-apply File.join(__dir__, 'rspec.rb') if rspec?
+
+if rspec?
+  apply File.join(__dir__, 'rspec.rb')
+else
+  apply File.join(__dir__, 'test_unit.rb')
+end
+
 apply File.join(__dir__, 'exceptions.rb')
 apply File.join(__dir__, 'responders.rb')
 apply File.join(__dir__, 'postgresql.rb')
