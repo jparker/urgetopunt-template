@@ -16,27 +16,25 @@ gem 'pry-rails'
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'responders', '~> 2.0'
-gem 'responders'
-
 gem 'simple_form', '~> 3.1.0'
 gem 'unicorn'
 
 gem_group :development do
   gem 'bundler-audit'
-  gem 'spring-commands-rspec'
+  gem 'spring-commands-rspec' if rspec?
 end
 
 gem_group :development, :test do
   gem 'dotenv-rails'
   gem 'ffaker'
-  gem 'rspec-rails', '~> 3.1.0'
+  gem 'rspec-rails', '~> 3.1.0' if rspec?
 end
 
 gem_group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'guard-rspec'
+  gem 'guard-rspec' if rspec?
   gem 'launchy'
   gem 'poltergeist'
   gem 'shoulda-matchers', require: false
