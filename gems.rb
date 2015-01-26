@@ -14,10 +14,15 @@ gem 'kaminari-bootstrap'
 gem 'newrelic_rpm'
 gem 'pry-rails'
 gem 'rack-cors', require: 'rack/cors'
-
 gem 'responders', '~> 2.0'
 gem 'simple_form', '~> 3.1.0'
-gem 'unicorn'
+
+if puma?
+  gem 'puma'
+  gem 'rack-timeout'
+else
+  gem 'unicorn'
+end
 
 gem_group :development do
   gem 'bundler-audit'

@@ -11,6 +11,7 @@ inject_into_file 'Gemfile', "ruby '#{RUBY_VERSION}'\n", after: /\Asource .*\n/
 
 # housekeeping that must be performed before anything below
 create_file '.env'
+create_file 'Procfile'
 
 apply File.join(__dir__, 'questions.rb')
 
@@ -18,7 +19,11 @@ apply File.join(__dir__, 'gems.rb')
 apply File.join(__dir__, 'general.rb')
 apply File.join(__dir__, 'cloudfront.rb')
 apply File.join(__dir__, 'sendgrid.rb')
-apply File.join(__dir__, 'unicorn.rb')
+if puma?
+  apply File.join(__dir__, 'puma.rb')
+else
+  apply File.join(__dir__, 'unicorn.rb')
+end
 apply File.join(__dir__, 'views.rb')
 apply File.join(__dir__, 'memory.rb')
 apply File.join(__dir__, 'rspec.rb') if rspec?
