@@ -1,2 +1,2 @@
 generate 'exception_notification:install'
-@todo << 'Update config/initializers/excpeption_notification.rb'
+@todo << 'Update config/initializers/exception_notification.rb'
