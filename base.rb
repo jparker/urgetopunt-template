@@ -8,6 +8,7 @@ end
 
 # set ruby version
 inject_into_file 'Gemfile', "ruby '#{RUBY_VERSION}'\n", after: /\Asource .*\n/
+create_file '.ruby-version', "#{RUBY_VERSION}\n"
 
 # housekeeping that must be performed before anything below
 create_file '.env'
