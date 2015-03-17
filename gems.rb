@@ -32,7 +32,7 @@ end
 gem_group :development, :test do
   gem 'dotenv-rails'
   gem 'ffaker'
-  gem 'rspec-rails', '~> 3.1.0' if rspec?
+  gem 'rspec-rails' if rspec?
 end
 
 gem_group :test do

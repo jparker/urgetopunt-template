@@ -4,18 +4,11 @@ inject_into_file 'spec/rails_helper.rb', after: /^# Add additional requires belo
   "require 'shoulda/matchers'\n"
 end
 
+config = File.read('spec/spec_helper.rb').sub(/\A.*=begin\s(.*)=end.*\z/m, '\1')
+
+inject_into_file 'spec/rails_helper.rb', config, before: /^end\Z/
 inject_into_file 'spec/rails_helper.rb', before: /^end\Z/ do
   <<-RUBY
-
-  config.filter_run focus: true
-  config.run_all_when_everything_filtered = true
-
-  config.order = :random
-  Kernel.srand config.seed
-
-  config.mock_with :rspec do |mocks|
-    mocks.syntax = :expect
-  end
 
   # Use a consistent time zone independent of local machine time zone. This
   # will make time zone brittleness in tests easier to track down.
