@@ -28,4 +28,3 @@ end
 RUBY
 
 append_file 'Procfile', "web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb\n"
-append_file '.env', "WEB_CONCURRENCY=3\n"

@@ -47,6 +47,3 @@ gem_group :test do
 end
 
 gem 'rails_12factor', group: [:production, :staging]
-
-bundle_opts = ENV.fetch('BUNDLE_OPTS') { '-j2' }
-run "bundle install #{bundle_opts}"

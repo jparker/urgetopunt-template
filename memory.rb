@@ -4,15 +4,12 @@ RUBY_VERSION.match /\A2\.[01]\./ do
     "\n  after_action ->{ GC::OOB.run }\n"
   end
 
-  inject_into_file 'config.ru', before: 'run Rails.application' do
-    <<-RUBY
+  inject_into_file 'config.ru', "\nrequire 'gctools/oobgc'\n", before: 'run Rails.application'
 
-  require 'gctools/oobgc'
-  if defined?(Unicorn::HttpRequest)
-    use GC::OOB::UnicornMiddleware
-  end
-
-    RUBY
+  if puma?
+    inject_into_file 'config.ru', "use GC::OOB::PumaMiddleware\n", before: 'run Rails.application'
+  else
+    inject_into_file 'config.ru', "use GC::OOB::UnicornMiddleware\n", before: 'run Rails.application'
   end
 end
 
