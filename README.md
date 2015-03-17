@@ -2,16 +2,13 @@
 
 To generate a Rails application with minimal features from this template:
 
-  $ rails new APP_NAME -m \
-  > https://github.com/jparker/urgetopunt-template/minimal.rb --skip-bundle
+    rails new APP_NAME -m https://github.com/jparker/urgetopunt-template/minimal.rb --skip-bundle
 
 # Full template
 
 To generate a Rails application with the full set of features:
 
-  $ rails new APP_NAME -m \
-  > https://github.com/jparker/urgetopunt-template/full.rb --skip-bundle \
-  > -d postgresql
+    rails new APP_NAME -m https://github.com/jparker/urgetopunt-template/full.rb --skip-bundle -d postgresql
 
 The full template includes some PostgreSQL-specific features, so be sure to
 include the -d option above.
