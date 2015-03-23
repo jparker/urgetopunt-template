@@ -31,7 +31,7 @@ end
 
 gem_group :development, :test do
   gem 'dotenv-rails'
-  gem 'ffaker'
+  gem 'faker'
   gem 'rspec-rails' if rspec?
 end
 
