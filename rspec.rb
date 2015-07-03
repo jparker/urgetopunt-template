@@ -10,8 +10,10 @@ inject_into_file 'spec/rails_helper.rb', config, before: /^end\Z/
 inject_into_file 'spec/rails_helper.rb', before: /^end\Z/ do
   <<-RUBY
 
-  # Use a consistent time zone independent of local machine time zone. This
-  # will make time zone brittleness in tests easier to track down.
+  # Use a consistent time zone independent of local machine. This will
+  # hopefully make brittle tests with time zone dependencies easier to track
+  # down. (For bonus points, use a time zone with an unusual UTC-offset.
+  # Kathmandu is UTC+0545.)
   config.around :each do |example|
     Time.use_zone 'Kathmandu', &example
   end

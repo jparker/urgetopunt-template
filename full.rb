@@ -30,7 +30,7 @@ apply File.join __dir__, 'memory.rb'
 if rspec?
   apply File.join __dir__, 'rspec.rb'
 else
-  apply File.join __dir__, 'test_unit.rb'
+  apply File.join __dir__, 'minitest.rb'
 end
 
 apply File.join __dir__, 'exceptions.rb'

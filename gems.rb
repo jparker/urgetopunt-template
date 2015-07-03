@@ -39,7 +39,14 @@ gem_group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'guard-rspec' if rspec?
+
+  if rspec?
+    gem 'guard-rspec'
+  else
+    gem 'minitest-focus'
+    gem 'minitest-reporters'
+  end
+
   gem 'launchy'
   gem 'poltergeist'
   gem 'shoulda-matchers', require: false
