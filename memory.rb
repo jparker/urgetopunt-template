@@ -1,5 +1,5 @@
-RUBY_VERSION.match /\A2\.[01]\./ do
-  # only use gctools on ruby < 2.2.0
+# only use gctools on ruby < 2.2.0
+if RUBY_VERSION.match /\A2\.[01]\./
   inject_into_file 'app/controllers/application_controller.rb', before: /end\z/ do
     "\n  after_action ->{ GC::OOB.run }\n"
   end
