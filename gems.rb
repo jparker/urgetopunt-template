@@ -14,8 +14,8 @@ gem 'kaminari-bootstrap'
 gem 'newrelic_rpm'
 gem 'pry-rails'
 gem 'rack-cors', require: 'rack/cors'
-gem 'responders', '~> 2.0'
-gem 'simple_form', '~> 3.1.0'
+gem 'responders'
+gem 'simple_form'
 
 if puma?
   gem 'puma'
