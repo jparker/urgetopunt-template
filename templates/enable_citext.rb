@@ -1,5 +1,5 @@
-class CreateCitextExtension < ActiveRecord::Migration
+class EnableCitext < ActiveRecord::Migration
   def change
-    enable_extension citext
+    enable_extension :citext
   end
 end
