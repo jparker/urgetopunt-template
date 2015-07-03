@@ -1,4 +1,4 @@
-@test_framework = yes?('Use rspec?') ? :rspec : :test_unit
+@test_framework = yes?('Use rspec?') ? :rspec : :minitest
 @app_server     = yes?('Use puma?') ? :puma : :unicorn
 
 def rspec?

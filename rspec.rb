@@ -1,5 +1,9 @@
 generate 'rspec:install'
 
+inject_into_file 'config/application.rb', after: "config.generators do |g|\n" do
+  "      g.test_framework :rspec, fixture: false\n"
+end
+
 inject_into_file 'spec/rails_helper.rb', after: /^# Add additional requires below this line.*\n/ do
   "require 'shoulda/matchers'\n"
 end
@@ -12,7 +16,7 @@ inject_into_file 'spec/rails_helper.rb', before: /^end\Z/ do
 
   # Use a consistent time zone independent of local machine. This will
   # hopefully make brittle tests with time zone dependencies easier to track
-  # down. (For bonus points, use a time zone with an unusual UTC-offset.
+  # down. (For bonus points, use a time zone with an unusual UTC-offset;
   # Kathmandu is UTC+0545.)
   config.around :each do |example|
     Time.use_zone 'Kathmandu', &example

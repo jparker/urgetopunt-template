@@ -44,6 +44,8 @@ gem_group :test do
     gem 'guard-rspec'
   else
     gem 'minitest-focus'
+    gem 'minitest-rails'
+    gem 'minitest-rails-capybara'
     gem 'minitest-reporters'
   end
 
