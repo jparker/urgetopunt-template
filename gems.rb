@@ -41,8 +41,11 @@ gem_group :test do
   gem 'factory_girl_rails'
 
   if rspec?
+    gem 'guard'
     gem 'guard-rspec'
   else
+    gem 'guard'
+    gem 'guard-minitest'
     gem 'minitest-focus'
     gem 'minitest-rails'
     gem 'minitest-rails-capybara'

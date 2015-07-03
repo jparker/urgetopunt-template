@@ -20,7 +20,8 @@ DatabaseCleaner.strategy = :transaction
 # be useful when test suite grows large.
 #
 # Minitest::Reporters.use!
-Minitest::Reporters.use! Minitest::Reporters::DefaultReporter.new
+Minitest::Reporters.use! Minitest::Reporters::DefaultReporter.new,
+  ENV, Minitest.backtrace_filter
 
   RUBY
 end
@@ -49,5 +50,16 @@ inject_into_file 'test/test_helper.rb', after: "# Add more helper methods to be 
   RUBY
 end
 
-# TODO: configure guard
+run 'bundle exec guard init minitest'
+gsub_file 'Guardfile', /guard :minitest/, 'guard :minitest, spring: true'
+
+guardfile = File.readlines('Guardfile').map do |line|
+              if line =~ /# Rails 4/ .. line =~ /# Rails < 4/
+                line.sub /# (watch.*)/, '\1'
+              else
+                line
+              end
+            end
+File.write 'Guardfile', guardfile.join
+
 # TODO?: tell spring when to run FactoryGirl.reload
