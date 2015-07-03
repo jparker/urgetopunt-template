@@ -4,13 +4,12 @@ inject_into_file 'config/application.rb', after: "config.generators do |g|\n" do
   "      g.test_framework :rspec, fixture: false\n"
 end
 
+@todo << 'Enable extra config in spec/spec_helper.rb between =begin and =end'
+
 inject_into_file 'spec/rails_helper.rb', after: /^# Add additional requires below this line.*\n/ do
   "require 'shoulda/matchers'\n"
 end
 
-config = File.read('spec/spec_helper.rb').sub(/\A.*=begin\s(.*)=end.*\z/m, '\1')
-
-inject_into_file 'spec/rails_helper.rb', config, before: /^end\Z/
 inject_into_file 'spec/rails_helper.rb', before: /^end\Z/ do
   <<-RUBY
 
