@@ -4,7 +4,7 @@ remove_file 'app/assets/stylesheets/application.css'
 
 append_file 'app/assets/stylesheets/application.css.scss', <<-SCSS
 // Uncomment and change this value to tweak font sizes globally.
-// $font-base-size: 12px;
+// $font-size-base: 12px;
 
 @import 'bootstrap';
 @import 'bootstrap/theme';
