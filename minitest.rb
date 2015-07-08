@@ -40,6 +40,10 @@ inject_into_file 'test/test_helper.rb', after: "# Add more helper methods to be 
     # bonus points, pick a time zone that is a far removed from the local time
     # zone where most development occurs and pick a weird UTC offset if possible.
     #
+    # Be sure the currently signed-in user uses the same time zone, e.g., when
+    # building the user set the time_zone column to Time.zone to inherit
+    # whatever the test is using.
+    #
     # I develop from PDT most of the time. Chatham Is. is UTC+1245.
     @_original_time_zone = Time.zone
     Time.zone = 'Chatham Is.'
