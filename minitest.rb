@@ -45,8 +45,7 @@ inject_into_file 'test/test_helper.rb', after: "# Add more helper methods to be 
     # whatever the test is using.
     #
     # I develop from PDT most of the time. Chatham Is. is UTC+1245.
-    @_original_time_zone = Time.zone
-    Time.zone = 'Chatham Is.'
+    @_original_time_zone, Time.zone = Time.zone, 'Chatham Is.'
   end
 
   def teardown
