@@ -13,12 +13,15 @@ end
 inject_into_file 'spec/rails_helper.rb', before: /^end\Z/ do
   <<-RUBY
 
-  # Use a consistent time zone independent of local machine. This will
-  # hopefully make brittle tests with time zone dependencies easier to track
-  # down. (For bonus points, use a time zone with an unusual UTC-offset;
-  # Kathmandu is UTC+0545.)
+  # Use a consistent time zone independent of the local time zone. This will
+  # make time zone dependencies in tests easier to diagnose rather than
+  # sporadically appearing when local time moves to a different time zone. For
+  # bonus points, pick a time zone that is a far removed from the local time
+  # zone where most development occurs and pick a weird UTC offset if possible.
+  #
+  # I develop from PDT most of the time. Chatham Is. is UTC+1245.
   config.around :each do |example|
-    Time.use_zone 'Kathmandu', &example
+    Time.use_zone 'Chatham Is.', &example
   end
 
   config.include FactoryGirl::Syntax::Methods

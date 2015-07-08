@@ -34,12 +34,15 @@ inject_into_file 'test/test_helper.rb', after: "# Add more helper methods to be 
   def setup
     DatabaseCleaner.start
 
-    # Use a consistent time zone independent of local machine. This will
-    # hopefully make brittle tests with time zone dependencies easier to track
-    # down. (For bonus points, use a time zone with an unusual UTC-offset;
-    # Kathmandu is UTC+0545.)
+    # Use a consistent time zone independent of the local time zone. This will
+    # make time zone dependencies in tests easier to diagnose rather than
+    # sporadically appearing when local time moves to a different time zone. For
+    # bonus points, pick a time zone that is a far removed from the local time
+    # zone where most development occurs and pick a weird UTC offset if possible.
+    #
+    # I develop from PDT most of the time. Chatham Is. is UTC+1245.
     @_original_time_zone = Time.zone
-    Time.zone = 'Kathmandu'
+    Time.zone = 'Chatham Is.'
   end
 
   def teardown
