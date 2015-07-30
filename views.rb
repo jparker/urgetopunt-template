@@ -6,10 +6,10 @@ append_file 'app/assets/stylesheets/application.css.scss', <<-SCSS
 // Uncomment and change this value to tweak font sizes globally.
 // $font-size-base: 12px;
 
-@import 'bootstrap';
-@import 'bootstrap/theme';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+@import 'bootstrap';
+@import 'bootstrap/theme';
 
 // Add a top margin to the body if using navbar fixed to the top of the page
 // body {
