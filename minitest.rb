@@ -16,11 +16,7 @@ require 'shoulda/matchers'
 
 DatabaseCleaner.strategy = :transaction
 
-# DefaultReporter provides red-green colorization. Additional reporters could
-# be useful when test suite grows large.
-#
-# Minitest::Reporters.use!
-Minitest::Reporters.use! Minitest::Reporters::DefaultReporter.new,
+Minitest::Reporters.use! Minitest::Reporters::ProgressReporter.new,
   ENV, Minitest.backtrace_filter
 
   RUBY
@@ -52,6 +48,14 @@ inject_into_file 'test/test_helper.rb', after: "# Add more helper methods to be 
     Time.zone = @_original_time_zone
 
     DatabaseCleaner.clean
+  end
+
+  # This ensure minitest-focus plays nicely with minitest-reporters when
+  # ProgressReporter is in use.
+  def self.focus
+    Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new,
+      ENV, Minitest.backtrace_filter
+    super
   end
   RUBY
 end
