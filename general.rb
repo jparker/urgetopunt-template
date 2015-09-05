@@ -17,3 +17,14 @@ append_file '.gitignore', "/log/*.log.*\n"
 
 # always use ssl in production
 uncomment_lines 'config/environments/production.rb', /config\.force_ssl = true/
+
+environment <<-RUBY, env: 'development'
+# Uncomment this line to re-enable asset logging.
+  # config.quiet_assets = false
+RUBY
+
+# raise error on missing translations in development and testing
+uncomment_lines 'config/environments/development.rb',
+  /config.action_view.raise_on_missing_translations = true/
+uncomment_lines 'config/environments/test.rb',
+  /config.action_view.raise_on_missing_translations = true/
