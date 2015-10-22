@@ -4,11 +4,13 @@
 require 'rails_helper'
 
 require 'capybara/rails'
-require 'capybara/poltergeist'
 
 require 'support/have_error_matcher'
 
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :webkit
+Capybara.configure do |config|
+  config.block_unknown_urls
+end
 
 RSpec.configure do |config|
   # For example:

@@ -38,6 +38,7 @@ end
 
 gem_group :test do
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
 
@@ -54,7 +55,6 @@ gem_group :test do
   end
 
   gem 'launchy'
-  gem 'poltergeist'
   gem 'shoulda-matchers', require: false
   gem 'timecop'
 end
