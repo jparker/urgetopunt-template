@@ -15,6 +15,7 @@ gem 'newrelic_rpm'
 gem 'pry-rails'
 gem 'rack-cors', require: 'rack/cors'
 gem 'responders'
+gem 'sass-rails'
 gem 'simple_form'
 
 if puma?
