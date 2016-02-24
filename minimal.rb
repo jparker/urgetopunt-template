@@ -2,7 +2,6 @@
 
 apply File.join __dir__, 'base_pre.rb'
 
-# i love pry
 gem 'pry-rails'
 
 # install gems

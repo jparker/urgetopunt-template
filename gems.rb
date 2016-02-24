@@ -57,7 +57,6 @@ gem_group :test do
 
   gem 'launchy'
   gem 'shoulda-matchers', require: false
-  gem 'timecop'
 end
 
 gem 'rails_12factor', group: [:production, :staging]
