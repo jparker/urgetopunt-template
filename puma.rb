@@ -1,4 +1,9 @@
-initializer 'timeout.rb', "Rack::Timeout.timeout = 20 # seconds\n"
+initializer 'timeout.rb', <<-RUBY
+Rack::Timeout.timeout = 20 # seconds
+if Rails.env.development?
+  Rack::Timeout::Logger.disable
+end
+RUBY
 
 create_file 'config/puma.rb', <<-RUBY
 # Configuration based on Heroku recommendations:
