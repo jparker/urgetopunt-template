@@ -56,6 +56,8 @@ template 'features_helper.rb', 'spec/features_helper.rb'
 template 'database_cleaner.rb', 'spec/support/database_cleaner.rb'
 template 'have_error_matcher.rb', 'spec/support/have_error_matcher.rb'
 
+create_file 'spec/factories/.gitkeep'
+
 Dir.mkdir 'spec/features'
 
 run 'bundle exec guard init'

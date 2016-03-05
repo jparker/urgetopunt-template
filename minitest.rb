@@ -14,6 +14,8 @@ require 'minitest/focus'
 require 'minitest/reporters'
 require 'shoulda/matchers'
 
+require 'support/flash_assertions'
+
 DatabaseCleaner.strategy = :transaction
 
 Minitest::Reporters.use! Minitest::Reporters::ProgressReporter.new,
@@ -26,6 +28,14 @@ inject_into_file 'test/test_helper.rb', after: "# Add more helper methods to be 
   <<-RUBY
 
   include FactoryGirl::Syntax::Methods
+
+  # This ensure minitest-focus plays nicely with minitest-reporters when
+  # ProgressReporter is in use.
+  def self.focus
+    Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new,
+      ENV, Minitest.backtrace_filter
+    super
+  end
 
   def setup
     DatabaseCleaner.start
@@ -49,19 +59,21 @@ inject_into_file 'test/test_helper.rb', after: "# Add more helper methods to be 
 
     DatabaseCleaner.clean
   end
-
-  # This ensure minitest-focus plays nicely with minitest-reporters when
-  # ProgressReporter is in use.
-  def self.focus
-    Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new,
-      ENV, Minitest.backtrace_filter
-    super
-  end
   RUBY
 end
 
+append_file 'test/test_helper.rb', <<-RUBY
+
+class Capybara::Rails::TestCase
+  include FlashAssertions
+end
+RUBY
+
+template 'flash_assertions.rb', 'test/support/flash_assertions.rb'
+
 run 'bundle exec guard init minitest'
 gsub_file 'Guardfile', /guard :minitest/, 'guard :minitest, spring: true'
+gsbu_file 'Guardfile', %r{test/integration}, 'test/features'
 
 guardfile = File.readlines('Guardfile').map do |line|
               if line =~ /# Rails 4/ .. line =~ /# Rails < 4/
@@ -71,5 +83,7 @@ guardfile = File.readlines('Guardfile').map do |line|
               end
             end
 File.write 'Guardfile', guardfile.join
+
+create_file 'test/factories/.gitkeep'
 
 # TODO?: tell spring when to run FactoryGirl.reload
