@@ -28,4 +28,5 @@ end
 RUBY
 
 append_file 'Procfile', "web: bundle exec puma -C config/puma.rb\n"
+create_file 'Procfile.development', "web: bundle exec puma -C config/puma.rb -b tcp://127.0.0.1:$PORT/\n"
 append_file '.env', "WEB_CONCURRENCY=3\nMAX_THREADS=5\n"

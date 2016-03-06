@@ -28,3 +28,4 @@ end
 RUBY
 
 append_file 'Procfile', "web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb\n"
+create_file 'Procfile.development', "web: bundle exec unicorn -o 127.0.0.1 -p $PORT -c ./config/unicorn.rb\n"
