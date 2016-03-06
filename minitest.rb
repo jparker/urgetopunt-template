@@ -14,9 +14,10 @@ require 'minitest/focus'
 require 'minitest/reporters'
 require 'shoulda/matchers'
 
+require 'support/error_assertions'
 require 'support/flash_assertions'
 
-DatabaseCleaner.strategy = :transaction
+DatabaseCleaner.strategy = :truncation
 
 Minitest::Reporters.use! Minitest::Reporters::ProgressReporter.new,
   ENV, Minitest.backtrace_filter
@@ -26,6 +27,7 @@ end
 
 inject_into_file 'test/test_helper.rb', after: "# Add more helper methods to be used by all tests here...\n" do
   <<-RUBY
+  self.use_transactional_fixtures = false
 
   include FactoryGirl::Syntax::Methods
 
@@ -37,27 +39,35 @@ inject_into_file 'test/test_helper.rb', after: "# Add more helper methods to be 
     super
   end
 
-  def setup
-    DatabaseCleaner.start
+  setup    :prepare_database
+  teardown :cleanup_database
 
-    # Use a consistent time zone independent of the local time zone. This will
-    # make time zone dependencies in tests easier to diagnose rather than
-    # sporadically appearing when local time moves to a different time zone. For
-    # bonus points, pick a time zone that is a far removed from the local time
-    # zone where most development occurs and pick a weird UTC offset if possible.
-    #
-    # Be sure the currently signed-in user uses the same time zone, e.g., when
-    # building the user set the time_zone column to Time.zone to inherit
-    # whatever the test is using.
-    #
-    # I develop from PDT most of the time. Chatham Is. is UTC+1245.
+  setup    :prepare_time_zone
+  teardown :cleanup_time_zone
+
+  def prepare_database
+    if !respond_to?(:metadata) || !metadata[:js]
+      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.start
+    end
+  end
+
+  def cleanup_database
+    if respond_to?(:metadata) && metadata[:js]
+      DatabaseCleaner.clean_with :deletion
+    else
+      DatabaseCleaner.clean
+    end
+  end
+
+  def prepare_time_zone
+    # Use a consistent time zone to make time zone dependency issues in tests
+    # easier to diagnose.
     @_original_time_zone, Time.zone = Time.zone, 'Chatham Is.'
   end
 
-  def teardown
+  def cleanup_time_zone
     Time.zone = @_original_time_zone
-
-    DatabaseCleaner.clean
   end
   RUBY
 end
@@ -65,15 +75,17 @@ end
 append_file 'test/test_helper.rb', <<-RUBY
 
 class Capybara::Rails::TestCase
+  include ErrorAssertions
   include FlashAssertions
 end
 RUBY
 
+template 'error_assertions.rb', 'test/support/error_assertions.rb'
 template 'flash_assertions.rb', 'test/support/flash_assertions.rb'
 
 run 'bundle exec guard init minitest'
 gsub_file 'Guardfile', /guard :minitest/, 'guard :minitest, spring: true'
-gsbu_file 'Guardfile', %r{test/integration}, 'test/features'
+gsub_file 'Guardfile', %r{test/integration}, 'test/features'
 
 guardfile = File.readlines('Guardfile').map do |line|
               if line =~ /# Rails 4/ .. line =~ /# Rails < 4/
