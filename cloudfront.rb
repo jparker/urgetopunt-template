@@ -9,6 +9,8 @@ config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
       resource '/assets/*', headers: :any, methods: [:get, :head]
     end
   end
+
+  config.static_cache_control = "public, max-age=\#{1.month}"
 RUBY
 
 @todo << 'Set asset_host in production.rb to cloudfront distro'

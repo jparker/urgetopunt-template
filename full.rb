@@ -25,6 +25,7 @@ else
 end
 
 apply File.join __dir__, 'views.rb'
+apply File.join __dir__, 'pages.rb'
 apply File.join __dir__, 'memory.rb'
 
 if rspec?
