@@ -7,6 +7,7 @@ if RUBY_VERSION.match /\A2\.[01]\./
   gem 'gctools', require: 'gctools/oobgc'
 end
 
+gem 'awesome_print'
 gem 'aws-sdk'
 gem 'haml-rails'
 gem 'jquery-ui-rails'

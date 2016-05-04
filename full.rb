@@ -15,6 +15,7 @@ bundle_opts = ENV.fetch('BUNDLE_OPTS') { '-j2' }
 run "bundle install #{bundle_opts}"
 
 apply File.join __dir__, 'general.rb'
+apply File.join __dir__, 'console.rb'
 apply File.join __dir__, 'cloudfront.rb'
 apply File.join __dir__, 'sendgrid.rb'
 
