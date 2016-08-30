@@ -30,7 +30,6 @@ end
 gem_group :development do
   gem 'bundler-audit'
   gem 'spring-commands-rspec' if rspec?
-  gem 'quiet_assets'
 end
 
 gem_group :development, :test do
