@@ -1,6 +1,3 @@
-# Haml indents rendered output in development but not production.
-initializer 'haml.rb', "Haml::Template.options[:ugly] = true\n"
-
 copy_file 'app/assets/stylesheets/application.css',
   'app/assets/stylesheets/application.css.scss'
 remove_file 'app/assets/stylesheets/application.css'

@@ -9,7 +9,7 @@ end
 
 gem 'awesome_print'
 gem 'aws-sdk'
-gem 'haml-rails'
+gem 'hamlit-rails'
 gem 'jquery-ui-rails'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
