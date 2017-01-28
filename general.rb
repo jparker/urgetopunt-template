@@ -9,8 +9,9 @@ RUBY
 # rotate logs in development/test environments
 %w[development test].each do |env|
   environment <<-RUBY, env: env
-# rotate logs when the grow to 5 MB, keep only the 5 most recent files
-  config.logger = Logger.new(Rails.root.join('log', Rails.env + '.log'), 5, 5_000_000)
+# Rotate logs when the grow to 5 MB, keep only the 5 most recent files.
+  config.logger = ActiveSupport::Logger.new \
+    Rails.root.join('log', Rails.env + '.log'), 5, 5*1_000*1_000
   RUBY
 end
 append_file '.gitignore', "/log/*.log.*\n"
