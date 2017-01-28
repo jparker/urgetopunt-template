@@ -2,11 +2,6 @@ gem 'bootstrap-sass'
 gem 'exception_notification'
 gem 'font-awesome-sass'
 
-# only use gctools on ruby < 2.2.0
-if RUBY_VERSION.match /\A2\.[01]\./
-  gem 'gctools', require: 'gctools/oobgc'
-end
-
 gem 'awesome_print'
 gem 'aws-sdk'
 gem 'hamlit-rails'
