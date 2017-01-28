@@ -17,7 +17,7 @@ RUBY
 environment <<-RUBY, env: 'development'
 config.action_mailer.default_url_options = {
     host: 'localhost',
-    port: ENV.fetch('PORT', #{puma? ? 3000 : 5000}),
+    port: ENV.fetch('PORT', 5000),
   }
 RUBY
 environment <<-RUBY, env: 'test'

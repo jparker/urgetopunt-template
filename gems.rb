@@ -10,17 +10,12 @@ gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'newrelic_rpm'
 gem 'pry-rails'
+gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
+gem 'rack-timeout'
 gem 'responders'
 gem 'sass-rails'
 gem 'simple_form'
-
-if puma?
-  gem 'puma'
-  gem 'rack-timeout'
-else
-  gem 'unicorn'
-end
 
 gem_group :development do
   gem 'bundler-audit'
@@ -52,7 +47,7 @@ gem_group :test do
   end
 
   gem 'launchy'
-  gem 'shoulda-matchers', require: false
+  gem 'shoulda-matchers'
 end
 
 gem 'rails_12factor', group: [:production, :staging]

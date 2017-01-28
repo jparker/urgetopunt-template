@@ -18,12 +18,7 @@ apply File.join __dir__, 'general.rb'
 apply File.join __dir__, 'console.rb'
 apply File.join __dir__, 'cloudfront.rb'
 apply File.join __dir__, 'sendgrid.rb'
-
-if puma?
-  apply File.join __dir__, 'puma.rb'
-else
-  apply File.join __dir__, 'unicorn.rb'
-end
+apply File.join __dir__, 'puma.rb'
 
 apply File.join __dir__, 'views.rb'
 apply File.join __dir__, 'pages.rb'

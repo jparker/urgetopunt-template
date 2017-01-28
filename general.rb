@@ -20,7 +20,7 @@ append_file '.gitignore', "/log/*.log.*\n"
 uncomment_lines 'config/environments/production.rb', /config\.force_ssl = true/
 
 # raise error on missing translations in development and testing
-uncomment_lines 'config/environments/development.rb',
-  /config.action_view.raise_on_missing_translations = true/
-uncomment_lines 'config/environments/test.rb',
-  /config.action_view.raise_on_missing_translations = true/
+%w[development test].each do |env|
+  uncomment_lines "config/environments/#{env}.rb",
+    /config.action_view.raise_on_missing_translations = true/
+end

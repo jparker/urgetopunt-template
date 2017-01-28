@@ -25,8 +25,8 @@ remove_file 'app/views/layouts/application.html.erb'
 template 'application.html.haml', 'app/views/layouts/application.html.haml'
 
 template 'flash_helper.rb', 'app/helpers/flash_helper.rb'
-template 'alert.html.haml', 'app/views/application/_alert.html.haml'
-template 'flash.html.haml', 'app/views/application/_flash.html.haml'
+template 'alert.haml', 'app/views/application/_alert.haml'
+template 'flash.haml', 'app/views/application/_flash.haml'
 
 # configure kaminari
 generate 'kaminari:config'

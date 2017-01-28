@@ -5,28 +5,6 @@ if Rails.env.development?
 end
 RUBY
 
-create_file 'config/puma.rb', <<-RUBY
-# Configuration based on Heroku recommendations:
-#
-# https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
-
-max_threads = Integer(ENV['MAX_THREADS'] || 5)
-min_threads = Integer(ENV['MIN_THREADS'] || max_threads)
-
-workers Integer(ENV['WEB_CONCURRENCY'] || 3)
-threads min_threads, max_threads
-
-preload_app!
-
-rackup      DefaultRackup
-port        ENV['PORT'] || 3000
-environment ENV['RACK_ENV'] || 'development'
-
-on_worker_boot do
-  ActiveRecord::Base.establish_connection
-end
-RUBY
-
 append_file 'Procfile', "web: bundle exec puma -C config/puma.rb\n"
 create_file 'Procfile.development', "web: bundle exec puma -C config/puma.rb -b tcp://127.0.0.1:$PORT/\n"
-append_file '.env', "WEB_CONCURRENCY=3\nMAX_THREADS=5\n"
+append_file '.env', "PORT=5000\n"
