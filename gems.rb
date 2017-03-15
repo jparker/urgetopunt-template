@@ -50,4 +50,4 @@ gem_group :test do
   gem 'shoulda-matchers'
 end
 
-gem 'rails_12factor', group: [:production, :staging]
+gem 'rails_12factor', group: [:production]

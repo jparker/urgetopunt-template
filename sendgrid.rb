@@ -11,7 +11,8 @@ environment <<-RUBY, env: 'production'
     enable_starttls_auto: true,
   }
   config.action_mailer.default_url_options = {
-    host: '#{app_name}-production.herokuapp.com',
+    protocol: 'https',
+    host: "\#{ENV['PUBLIC_SERVER_NAME']}",
   }
 RUBY
 environment <<-RUBY, env: 'development'

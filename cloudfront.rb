@@ -5,12 +5,14 @@ comment_lines 'config/environments/production.rb', /config\.serve_static_assets 
 environment <<RUBY, env: 'production'
 config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
     allow do
-      origins 'https://#{app_name}-production.herokuapp.com'
+      origins "https://\#{ENV['PUBLIC_SERVER_NAME']}"
       resource '/assets/*', headers: :any, methods: [:get, :head]
     end
   end
 
-  config.static_cache_control = "public, max-age=\#{1.month}"
+  config.public_file_server.headers = {
+    'Cache-Control' => "public, max-age=\#{1.month}",
+  }
 RUBY
 
 @todo << 'Set asset_host in production.rb to cloudfront distro'

@@ -34,9 +34,6 @@ apply File.join __dir__, 'exceptions.rb'
 apply File.join __dir__, 'responders.rb'
 apply File.join __dir__, 'postgresql.rb'
 
-# Should be applied after all other changes to config/environments/production.rb
-apply File.join __dir__, 'staging.rb'
-
 @todo << "Setup git remotes: 'git remote add origin git@github.com:...'"
 
 File.write 'TODO', @todo.map { |item| "[ ] #{item}" }.join("\n") + "\n"
