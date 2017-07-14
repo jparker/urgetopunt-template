@@ -1,3 +1,5 @@
-%div{ class: ['alert', alert_class(severity), 'alert-dismissable'], data: { dismiss: 'alert' } }
-  = close_alert
-  = alert_icon severity, message, class: 'fa-lg'
+%div{ class: "alert #{severity} alert-dismissable", data: { dismiss: 'alert' } }
+  %button.close(aria-label='Dismiss' data-dismiss='alert' type='button')
+    %span(aria-hidden='true')
+      = icon 'times'
+  = icon alert_icon(severity), message, class: 'fa-lg'

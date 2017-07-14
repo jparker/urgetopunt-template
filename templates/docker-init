@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker run -d -p 32768:5432 \
+  -e POSTGRES_USER=<%= app_name %> -e POSTGRES_PASSWORD=awooga \
+  --name <%= app_name %>-postgres postgres

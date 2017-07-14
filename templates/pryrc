@@ -1,9 +1,8 @@
-create_file '.pryrc', <<-RUBY
 AwesomePrint.pry!
 
 if defined?(Rails)
   Pry.config.prompt = lambda do |obj, nest_level, _|
-    "\#{app_name}/\#{env_name} \#{obj}:\#{nest_level}> "
+    "#{app_name}/#{env_name} #{obj}:#{nest_level}> "
   end
 end
 
@@ -12,7 +11,7 @@ def app_name
 end
 
 def env_name
-  ENV['HEROKU_APP_NAME'].match /-([[:alpha:]]+)\z/ do |m|
+  ENV['HEROKU_APP_NAME'].match /-([[:alnum:]]+)\z/ do |m|
     case m[1]
     when 'development'
       Pry::Helpers::Text.bright_green m[1]
@@ -27,4 +26,3 @@ def env_name
     end
   end
 end
-RUBY

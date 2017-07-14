@@ -16,6 +16,6 @@ RSpec::Matchers.define :have_flash do |key, **options|
   end
 
   failure_message_when_negated do
-    "expected to NOT find text '#{@content}' in '#{@node.text}'"
+    "expected NOT to find text '#{@content}' in \#{@node.text}'"
   end
 end

@@ -1,36 +1,27 @@
 module FlashHelper
-  ALERT_SEVERITIES = {
+  SEVERITIES = {
     'notice'  => 'alert-success',
-    'info'    => 'alert-info',
     'warning' => 'alert-warning',
     'alert'   => 'alert-danger',
-  }
+  }.tap { |h| h.default = 'alert-info' }
 
-  def alert_class(key)
-    ALERT_SEVERITIES.fetch(key)
-  end
-
-  ALERT_ICONS = {
-    'notice'  => 'check-circle',
-    'info'    => 'info-circle',
+  SEVERITY_ICONS = {
+    'notice'  => 'check',
     'warning' => 'exclamation-triangle',
     'alert'   => 'exclamation-circle',
-  }
+  }.tap { |h| h.default = 'info-circle' }
 
-  def alert_icon(key, *args)
-    icon ALERT_ICONS.fetch(key), *args
+  IGNORED_FLASH_KEYS = %w[timedout]
+
+  def alert_class(severity)
+    SEVERITIES[severity]
   end
 
-  def close_alert
-    button_tag aria: { label: 'Close' }, class: 'close', data: { dismiss: 'alert' }, type: 'button' do
-      content_tag :span, raw('&times;'), aria: { hidden: true }
-    end
+  def alert_icon(severity)
+    SEVERITY_ICONS[severity]
   end
-
-  # Devise stores data in the flash that is not meant to be displayed
-  IGNORED_FLASH_KEYS = %w[ timedout ]
 
   def printable_flash
-    flash.reject { |key, _| IGNORED_FLASH_KEYS.include? key }
+    flash.reject { |key, _| key.in? IGNORED_FLASH_KEYS }
   end
 end

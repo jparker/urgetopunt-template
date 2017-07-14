@@ -2,7 +2,6 @@ RSpec::Matchers.define :have_error do |message, on:|
   match do |node|
     @group = node.find_field on
 
-    # Locate the form-group container
     begin
       @group = @group.find :xpath, '..'
     end until @group[:class].to_s.include?('form-group')

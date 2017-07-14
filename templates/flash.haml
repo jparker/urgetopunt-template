@@ -1,2 +1,2 @@
 - printable_flash.each do |severity, message|
-  = render 'alert', severity: severity, message: message
+  = render 'alert', severity: alert_class(severity), message: message
