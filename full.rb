@@ -223,17 +223,15 @@ after_bundle do
 
   inject_into_file 'app/controllers/exceptions_controller.rb', before: /end/ do
     <<-RUBY
-    def test
-      raise 'This action deliberately raises a RuntimeError' \\
-        ' in order to test exception notification.'
-    end
+  def test
+    raise 'This action deliberately raises a RuntimeError' \\
+      ' in order to test exception notification.'
+  end
     RUBY
   end
 
   inject_into_file 'spec/controllers/exceptions_controller_spec.rb', before: /end/ do
-    <<-RUBY
-    it { expect { get :test }.to raise_error RuntimeError }
-    RUBY
+    "  it { expect { get :test }.to raise_error RuntimeError }\n"
   end
 end
 
