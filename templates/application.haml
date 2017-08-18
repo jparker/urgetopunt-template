@@ -3,7 +3,7 @@
   %head
     %title
       <%= app_name %>
-      - if config_for? :title
+      - if content_for? :title
         &mdash;
         = yield :title
     %meta(charset='utf-8')
