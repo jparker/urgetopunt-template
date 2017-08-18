@@ -38,9 +38,9 @@ gem 'rails_12factor', group: :production
 #
 # https://github.com/rails/rails/issues/21700
 #
-# A workaround is to stop spring after install the gems and before running any
-# generators. This approach requires the spring gem to be installed globally
-# alonside the rails gem.
+# A workaround is to stop spring after installing the gems but before running
+# any generators. This approach requires the spring gem to be installed
+# globally alonside the rails gem.
 after_bundle do
   run 'spring stop'
 end
@@ -79,6 +79,7 @@ end
 # after_bundle block is called before any others.
 #
 gem_group :development, :test do
+  gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
 end
@@ -90,7 +91,6 @@ end
 gem_group :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
   gem 'shoulda-matchers'
 end
 
@@ -105,7 +105,7 @@ template 'have_flash_matcher.rb', 'spec/support/have_flash_matcher.rb'
 after_bundle do
   generate 'rspec:install'
 
-  inject_into_file 'config/application.rb', <<-RUBY, after: /g\.helper = false/
+  inject_into_file 'config/application.rb', <<-RUBY, after: /g\.helper false\n/
       g.test_framework :rspec, fixture: false
   RUBY
 
@@ -117,12 +117,12 @@ after_bundle do
   comment_lines 'spec/rails_helper.rb', /config\.use_transactional_fixtures = true/
   comment_lines 'spec/rails_helper.rb', /config\.fixture_path/
 
-  inject_into_file 'spec/rails_helper.rb', <<-RUBY, after: /^# Add additional requires.*\n/
+  inject_into_file 'spec/rails_helper.rb', <<~RUBY, after: /^# Add additional requires.*\n/
 
   require 'capybara/rails'
   RUBY
 
-  inject_into_file 'spec/rails_helper.rb', <<-RUBY, after: /maintain_test_schema!\n/
+  inject_into_file 'spec/rails_helper.rb', <<~RUBY, after: /maintain_test_schema!\n/
 
   Capybara.javascript_driver = :webkit
 
@@ -140,13 +140,13 @@ after_bundle do
 
   inject_into_file 'spec/rails_helper.rb', <<-RUBY, before: /^end\Z/
 
-    # Make time zone dependencies in tests easier to expose.
-    config.around :each do |example|
-      Time.use_zone 'Chatham Is.', &example
-    end
+  # Make time zone dependencies in tests easier to expose.
+  config.around :each do |example|
+    Time.use_zone 'Chatham Is.', &example
+  end
 
-    config.include ActiveSupport::Testing::TimeHelpers
-    config.include FactoryGirl::Syntax::Methods
+  config.include ActiveSupport::Testing::TimeHelpers
+  config.include FactoryGirl::Syntax::Methods
   RUBY
 end
 
@@ -242,7 +242,7 @@ end
   environment <<-RUBY, env: env
 # Rotate logs when they exceed 5MB; keep three most recent.
   config.logger = ActiveSupport::Logger.new \\
-    Rails.root.join('log', Rails.env + '.log'), 5, 5 * 1_000_000
+    Rails.root.join('log', Rails.env + '.log'), 3, 5 * 1_000_000
   RUBY
 end
 
@@ -419,8 +419,6 @@ Before deploying this application, you may need to setup environment variables:
 * PUBLIC_SERVER_NAME
 * CLOUDFRONT_URL
 TXT
-
-# Generate migrations to enable citext, plpgsql, pg_trgm extensions.
 
 after_bundle do
   git add: '-A'
